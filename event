@@ -78,3 +78,133 @@
   </form>
 </body>
 </html>
+
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Temperature Converter</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Temperature Converter</h1>
+        <div class="converter-row">
+            <div class="col">
+                <label for="fahrenheit">Fahrenheit</label>
+                <input type="number" id="fahrenheit" placeholder="°F">
+            </div>
+            <div class="col">
+                <label for="celsius">Celsius</label>
+                <input type="number" id="celsius" placeholder="°C">
+            </div>
+            <div class="col">
+                <label for="kelvin">Kelvin</label>
+                <input type="number" id="kelvin" placeholder="K">
+            </div>
+        </div>
+        <button id="convert-btn">Convert</button>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+.container {
+    width: 100%;
+    height: 100vh;
+    background-image: linear-gradient(rgb(140, 219, 140), rgb(20, 141, 20));
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+h1 {
+    color: white;
+    margin-bottom: 20px;
+}
+
+.converter-row {
+    display: flex;
+    width: 60%;
+    justify-content: space-between;
+    align-items: center;
+    background: rgb(0, 56, 0);
+    border-radius: 10px;
+    padding: 20px;
+}
+
+.col {
+    flex-basis: 30%;
+    text-align: center;
+}
+
+.col label {
+    font-size: 16px;
+    font-weight: bold;
+    color: #fff;
+}
+
+.col input {
+    width: 80%;
+    height: 35px;
+    background: white;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    text-align: center;
+    margin-top: 5px;
+}
+
+button {
+    margin-top: 20px;
+    padding: 10px 20px;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    background-color: #4CAF50;
+    color: white;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #45a049;
+}
+
+
+let celsius = document.getElementById('celsius');
+let fahrenheit = document.getElementById('fahrenheit');
+let kelvin = document.getElementById('kelvin');
+
+function convertTemperatures() {
+    const c = parseFloat(celsius.value);
+    const f = parseFloat(fahrenheit.value);
+    const k = parseFloat(kelvin.value);
+
+    if (!isNaN(c)) {
+        fahrenheit.value = (c * 9/5 + 32).toFixed(2);
+        kelvin.value = (c + 273.15).toFixed(2);
+    } else if (!isNaN(f)) {
+        celsius.value = ((f - 32) * 5/9).toFixed(2);
+        kelvin.value = ((f - 32) * 5/9 + 273.15).toFixed(2);
+    } else if (!isNaN(k)) {
+        celsius.value = (k - 273.15).toFixed(2);
+        fahrenheit.value = ((k - 273.15) * 9/5 + 32).toFixed(2);
+    }
+}
+
+document.getElementById('convert-btn').addEventListener('click', convertTemperatures);
+
+
